@@ -8,9 +8,9 @@ const App = (props: Props) => {
 
   useEffect(() => {
     const fetchstudents = async () => {
-      const response = await axios.get("http://127.0.0.1:8000/api/students/");
-      setStudents(response.data);
-      console.log(response.data);
+      const res = await axios.get("http://127.0.0.1:8000/api/students/");
+      setStudents(res.data);
+      console.log(res.data);
     };
     fetchstudents();
   }, []);
@@ -23,6 +23,8 @@ const App = (props: Props) => {
           <div key={student.id}>
             <h3>{student.name}</h3>
             <p>Email: {student.email}</p>
+            <p>created_at: {student.created_at}</p>
+          
           </div>
         ))}
       </div>
