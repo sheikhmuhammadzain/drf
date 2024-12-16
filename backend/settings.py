@@ -144,3 +144,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ],
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
