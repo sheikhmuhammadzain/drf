@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-
+import "./App.css";
 type Props = {};
 
 const App = (props: Props) => {
@@ -16,15 +16,15 @@ const App = (props: Props) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h1>Students</h1>
-      <div>
+      <div className="student-list">
         {students.map((student: any) => (
-          <div key={student.id}>
+          <div className="student-card" key={student.id}>
             <h3>{student.name}</h3>
             <p>Email: {student.email}</p>
             <p>created_at: {student.created_at}</p>
-          
+            <button>Delete</button>
           </div>
         ))}
       </div>
