@@ -14,7 +14,8 @@ function App() {
   return (
     <>
       <h1>hello</h1>
-    </>
+      <button onClick={fetchData}>fetch data</button>
+      </>
   );
 }
 
