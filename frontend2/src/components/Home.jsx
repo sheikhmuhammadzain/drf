@@ -1,29 +1,30 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [username, setUsername] = useState('');
-  const [token, setToken] = useState('');
+  const [username, setUsername] = useState("");
+  const [accessToken, setAccessToken] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    const storedToken = localStorage.getItem('token');
-    
-    if (!storedToken || !storedUsername) {
-      alert('You are not signed in. Please sign up first.');
-      navigate('/login');
+    const storedUsername = localStorage.getItem("username");
+    const storedAccessToken = localStorage.getItem("access_token");
+
+    if (!storedAccessToken || !storedUsername) {
+      alert("You are not signed in. Please sign up first.");
+      navigate("/login");
       return;
     }
 
     setUsername(storedUsername);
-    setToken(storedToken);
+    setAccessToken(storedAccessToken);
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    navigate('/login');
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("username");
+    navigate("/login");
   };
 
   return (
@@ -38,14 +39,16 @@ const Home = () => {
               <span className="value">{username}</span>
             </div>
             <div className="info-item">
-              <span className="label">JWT Token:</span>
+              <span className="label">Access Token:</span>
               <div className="token-container">
-                <span className="token">{token}</span>
+                <span className="token">{accessToken}</span>
               </div>
             </div>
           </div>
         </div>
-        <button onClick={handleLogout} className="button">Logout</button>
+        <button onClick={handleLogout} className="button">
+          Logout
+        </button>
       </div>
     </div>
   );

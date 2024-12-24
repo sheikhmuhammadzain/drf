@@ -11,18 +11,11 @@ import {
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Home from "./components/Home";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  // async function fetchData() {
-  //   const response = await axios.get("http://127.0.0.1:8000/api/students/");
-  //   console.log(response.data);
-  // }
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   return (
     <Router>
@@ -30,7 +23,14 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

@@ -10,12 +10,21 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/api/login/", {
+      const response = await axios.post("http://localhost:8000/api/token/", {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
       });
-      localStorage.setItem("token", response.data.token);
+
+      // Store both tokens
+      localStorage.setItem("access_token", response.data.access);
+      localStorage.setItem("refresh_token", response.data.refresh);
       localStorage.setItem("username", usernameRef.current.value);
+
+      // Set default authorization header for future requests
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${response.data.access}`;
+
       navigate("/home");
     } catch (error) {
       alert("Invalid credentials. Please try again.");
