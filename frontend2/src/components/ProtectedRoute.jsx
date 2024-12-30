@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+
 
 const ProtectedRoute = ({ children }) => {
   const accessToken = localStorage.getItem("access_token");
@@ -25,12 +26,12 @@ const ProtectedRoute = ({ children }) => {
   }
 
   try {
-    const decodedToken = jwt_decode(accessToken);
+    const decodedToken = jwtDecode(accessToken);
     const currentTime = Date.now() / 1000;
 
     if (decodedToken.exp < currentTime) {
-      // Token expired, try to refresh
-      const newToken = refreshAccess();
+      // Changed to await the async function
+      const newToken =  refreshAccess();
       if (!newToken) {
         return <Navigate to="/login" replace />;
       }
