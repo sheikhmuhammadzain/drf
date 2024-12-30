@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import "./Login.css";
 
 const Login = () => {
   const usernameRef = useRef();
@@ -19,11 +20,7 @@ const Login = () => {
       localStorage.setItem("refresh_token", response.data.refresh);
       localStorage.setItem("username", usernameRef.current.value);
 
-      // Set default authorization header for future requests
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${response.data.access}`;
-
+      axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.access}`;
       navigate("/home");
     } catch (error) {
       alert("Invalid credentials. Please try again.");
@@ -31,34 +28,34 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
-        <h2 className="title">Login</h2>
-        <form onSubmit={handleSubmit} className="form">
+    <div className="login-container">
+      <h2 className="login-title">Login</h2>
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
           <input
             type="text"
-            placeholder="Username"
+            id="username"
             ref={usernameRef}
-            className="input"
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
-            placeholder="Password"
+            id="password"
             ref={passwordRef}
-            className="input"
             required
           />
-          <button type="submit" className="button">
-            Login
-          </button>
-        </form>
-        <p className="text">
-          Don't have an account?{" "}
-          <Link to="/signup" className="link">
-            Sign Up
-          </Link>
-        </p>
+        </div>
+        <button type="submit" className="login-button">
+          Login
+        </button>
+      </form>
+      <div className="signup-link">
+        Don't have an account?{" "}
+        <Link to="/signup">Sign Up</Link>
       </div>
     </div>
   );

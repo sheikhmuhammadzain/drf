@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Home.css";
 
 const Home = () => {
   const [username, setUsername] = useState("");
@@ -28,27 +29,27 @@ const Home = () => {
   };
 
   return (
-    <div className="container">
-      <div className="content">
-        <h1 className="title">Welcome, {username}!</h1>
-        <div className="card">
-          <h3 className="subtitle">Your Profile</h3>
-          <div className="info-container">
-            <div className="info-item">
-              <span className="label">Username:</span>
-              <span className="value">{username}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">Access Token:</span>
-              <div className="token-container">
-                <span className="token">{accessToken}</span>
-              </div>
+    <div className="home-container">
+      <header className="home-header">
+        <h1 className="welcome-message">Welcome, {username}!</h1>
+        <div className="nav-buttons">
+          <button onClick={handleLogout} className="nav-button logout-button">
+            Logout
+          </button>
+        </div>
+      </header>
+      
+      <div className="home-content">
+        <div className="content-section">
+          <h2 className="section-title">Your Profile</h2>
+          <div className="section-content">
+            <p><strong>Username:</strong> {username}</p>
+            <p><strong>Access Token:</strong></p>
+            <div style={{ wordBreak: 'break-all' }}>
+              {accessToken}
             </div>
           </div>
         </div>
-        <button onClick={handleLogout} className="button">
-          Logout
-        </button>
       </div>
     </div>
   );

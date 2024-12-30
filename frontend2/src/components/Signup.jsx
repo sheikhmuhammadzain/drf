@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import './Signup.css';
 
 const Signup = () => {
   const usernameRef = useRef();
@@ -22,29 +23,31 @@ const Signup = () => {
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
-        <h2 className="title">Sign Up</h2>
-        <form onSubmit={handleSubmit} className="form">
+    <div className="signup-container">
+      <h2 className="signup-title">Sign Up</h2>
+      <form onSubmit={handleSubmit} className="signup-form">
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
           <input
             type="text"
-            placeholder="Username"
+            id="username"
             ref={usernameRef}
-            className="input"
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
-            placeholder="Password"
+            id="password"
             ref={passwordRef}
-            className="input"
             required
           />
-          <button type="submit" className="button">Sign Up</button>
-        </form>
-        <p className="text">
-          Already have an account? <Link to="/login" className="link">Login</Link>
-        </p>
+        </div>
+        <button type="submit" className="signup-button">Sign Up</button>
+      </form>
+      <div className="login-link">
+        Already have an account? <Link to="/login">Login</Link>
       </div>
     </div>
   );
