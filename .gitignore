@@ -1,0 +1,16 @@
+# Environment variables
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# Misc
+.DS_Store
+*.log
+.vercel/
+config.bat
